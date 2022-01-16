@@ -1,2 +1,2 @@
-# miscobrosqui
-Repositorio oficial de Mis cobros aqui
+# MisCobrosAqui
+Aplicacion de Miscobrosaqui para controlar el contenido de Miscobrosaqui Repositorio Oficial
