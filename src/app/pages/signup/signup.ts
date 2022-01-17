@@ -19,11 +19,11 @@ export class SignupPage {
   signup: UserOptions = { username: '', password: '' };
   submitted = false;
   codigos_validos_activar:any;
-  respuestaobtenercodigosoptimacodigosdeactivacion: any;
+  respuestamiscobrosobtenercodigosoptimacodigosdeactivacion: any;
   tipo_cuenta: any;
   step: any;
-  respuestaagregarcodigo: any;
-  respuestatodoslosusuarios: any;
+  respuestamiscobrosagregarcodigo: any;
+  respuestamiscobrostodoslosusuarios: any;
   username: any;
 
   constructor(
@@ -70,14 +70,14 @@ export class SignupPage {
 
      this.tipo_cuenta=this.json.tipo_cuenta;
 
-    var dataobtenercodigosoptimacodigosdeactivacion = {
-      nombre_solicitud:'obtenercodigosoptimacodigosdeactivacion',
+    var datamiscobrosobtenercodigosoptimacodigosdeactivacion = {
+      nombre_solicitud:'miscobrosobtenercodigosoptimacodigosdeactivacion',
       tipo_cuenta:this.tipo_cuenta
     }
-      this.json.variasfunciones(dataobtenercodigosoptimacodigosdeactivacion).subscribe((res: any ) =>{
-            console.log(' respuesta obtenercodigosoptimacodigosdeactivacion ',res);
+      this.json.variasfunciones(datamiscobrosobtenercodigosoptimacodigosdeactivacion).subscribe((res: any ) =>{
+            console.log(' respuesta miscobrosobtenercodigosoptimacodigosdeactivacion ',res);
             actualziando.dismiss();
-            this.respuestaobtenercodigosoptimacodigosdeactivacion=res;
+            this.respuestamiscobrosobtenercodigosoptimacodigosdeactivacion=res;
       });
    }
 
@@ -95,7 +95,7 @@ export class SignupPage {
     this.codigos_validos_activar=event.target.value;
   } 
 
-  async agregarcodigo(){
+  async miscobrosagregarcodigo(){
 
     const agregando = await this.loadingController.create({
       message: 'agregando código, porfavor espere',spinner: 'bubbles',duration: 14000,
@@ -105,13 +105,13 @@ export class SignupPage {
       });
 
 
-    var dataagregarcodigo = {
-      nombre_solicitud:'agregarcodigo',
+    var datamiscobrosagregarcodigo = {
+      nombre_solicitud:'miscobrosagregarcodigo',
       codigos_validos_activar: this.codigos_validos_activar
     }
-      this.json.variasfunciones(dataagregarcodigo).subscribe((res: any ) =>{
-            console.log(' respuesta verificarusuario ',res);
-            this.respuestaagregarcodigo=res;
+      this.json.variasfunciones(datamiscobrosagregarcodigo).subscribe((res: any ) =>{
+            console.log(' respuesta miscobrosverificarusuario ',res);
+            this.respuestamiscobrosagregarcodigo=res;
             if(res.id>0){
               agregando.dismiss();
               agreado.present();
@@ -130,13 +130,13 @@ export class SignupPage {
       });
       actualizando.present();
 
-      var datatodoslosusuarios = {
-        nombre_solicitud:'todoslosusuarios',
+      var datamiscobrostodoslosusuarios = {
+        nombre_solicitud:'miscobrostodoslosusuarios',
         tipo_cuenta:this.tipo_cuenta
       }
-        this.json.variasfunciones(datatodoslosusuarios).subscribe((res: any ) =>{
-              console.log(' respuesta todoslosusuarios ',res);
-              this.respuestatodoslosusuarios=res;
+        this.json.variasfunciones(datamiscobrostodoslosusuarios).subscribe((res: any ) =>{
+              console.log(' respuesta miscobrostodoslosusuarios ',res);
+              this.respuestamiscobrostodoslosusuarios=res;
               actualizando.dismiss();
 
               
@@ -158,12 +158,12 @@ export class SignupPage {
       });
       actualizando.present();
 
-      var dataactivarusuariopanel = {
-        nombre_solicitud:'activarusuariopanel',
+      var datamiscobrosactivarusuariopanel = {
+        nombre_solicitud:'miscobrosactivarusuariopanel',
         username: cadausuario.username
       }
-        this.json.variasfunciones(dataactivarusuariopanel).subscribe((res: any ) =>{
-              console.log(' respuesta activarusuariopanel ',res);
+        this.json.variasfunciones(datamiscobrosactivarusuariopanel).subscribe((res: any ) =>{
+              console.log(' respuesta miscobrosactivarusuariopanel ',res);
               actualizando.dismiss();
 
               
@@ -185,12 +185,12 @@ export class SignupPage {
       });
       actualizando.present();
 
-      var datadesactivarusuariopanel = {
-        nombre_solicitud:'desactivarusuariopanel',
+      var datadesmiscobrosactivarusuariopanel = {
+        nombre_solicitud:'desmiscobrosactivarusuariopanel',
         username: cadausuario.username
       }
-        this.json.variasfunciones(datadesactivarusuariopanel).subscribe((res: any ) =>{
-              console.log(' respuesta desactivarusuariopanel ',res);
+        this.json.variasfunciones(datadesmiscobrosactivarusuariopanel).subscribe((res: any ) =>{
+              console.log(' respuesta desmiscobrosactivarusuariopanel ',res);
               actualizando.dismiss();
 
               //desactivado/activado actualizamos lista...
@@ -201,4 +201,9 @@ export class SignupPage {
 
     
   }
+
+  administrarusuario(cadausuario){
+    console.log('cadausuario',cadausuario);
+  }
+
 }

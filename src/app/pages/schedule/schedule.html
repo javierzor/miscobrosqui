@@ -1,20 +1,19 @@
 <ion-header translucent="true">
   <ion-toolbar>
+        <ion-title *ngIf="this.json.tipo_cuenta==999">Sesión Admin</ion-title>
+                <ion-title *ngIf="this.json.tipo_cuenta==1">Mis Cobros</ion-title>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
 
-    <ion-buttons *ngIf="!showSearchbar" slot="start">
-      <!-- <ion-menu-button></ion-menu-button> -->
+    <!-- <ion-buttons *ngIf="!showSearchbar" slot="start">
     </ion-buttons>
 
     <ion-title *ngIf="!ios && !showSearchbar"></ion-title>
     <ion-grid>
       <ion-row  class="ion-no-padding ion-align-content-center vertical-center ion-align-items-center">
-        <ion-col size="10.6">
-          <!-- <ion-searchbar *ngIf="showSearchbar" showCancelButton="always" [(ngModel)]="filterTerm" (ionChange)="updateSchedule()" (ionCancel)="showSearchbar = false" placeholder="Search"></ion-searchbar> -->
+        <ion-col size="10.6">          
           <ion-searchbar  (keyup.enter)="paso2()"  *ngIf="showSearchbar" showCancelButton="always" (ionClear)="closeycancelboton()" showCloseButton="false" (ionCancel)="closeycancelboton()" placeholder="Buscar..." [(ngModel)]="filterTerm" animated="true"></ion-searchbar>
- 
         </ion-col>
         <ion-col class="ion-no-padding ion-align-content-center vertical-center ion-align-items-center" no-padding size="1.4">
           <ion-button (click)="paso2()" style="margin-left: -4px;" *ngIf="showSearchbar" >
@@ -28,18 +27,15 @@
       <ion-button [disabled]="this.json.tipo_cuenta==0" *ngIf="!ios && !showSearchbar" (click)="showSearchbar = true">
         <ion-icon slot="icon-only" name="search"></ion-icon>
       </ion-button>
-      <!-- <ion-button *ngIf="!showSearchbar" (click)="presentFilter()">
-        <span *ngIf="ios">Filter</span>
-        <span *ngIf="!ios">
-          <ion-icon slot="icon-only" name="options"></ion-icon>
-        </span>
-      </ion-button> -->
-    </ion-buttons>
+
+    </ion-buttons> -->
 
 </ion-toolbar>
 </ion-header>
 
 <ion-content fullscreen="true">
+
+<section *ngIf="this.json.tipo_cuenta==1">
 
 
 
@@ -128,10 +124,35 @@
 
 <section *ngIf="this.step!='2'&&this.step=='1'">
 
-  <ion-grid style="text-align: center;" *ngIf="!videosendata&&this.isloggedin=='si'&&this.puedevervideos=='si'">
-    <h1 style="color: #f07404;" color="primary">Seleccione una categoria</h1>
-      <img style="margin-top: -50px; transform: rotate(90deg); width:40%; height:40%" width="80%" height="80%" src="./../../../assets/img/categoria_seleccione6.gif ">
-  
+  <ion-grid>
+
+<ion-card>
+
+  <ion-card-header>
+    <ion-card-subtitle>
+    <ion-row>
+      <ion-col style="text-align: center;" size="5.5">
+        <ion-text color="primary">Nombre</ion-text>
+      </ion-col>
+      <ion-col style="text-align: center;" size="3.5">
+        <ion-text color="primary">Metodo</ion-text>
+      </ion-col>
+      <ion-col style="text-align: center;" size="3">
+        <ion-text color="primary">Monto</ion-text>
+      </ion-col>
+    </ion-row>
+  </ion-card-subtitle>
+  </ion-card-header>
+
+  </ion-card>
+
+
+  <ion-card style="text-align: center;" color="transparent;" color="transparent">
+    <br>
+    <ion-label><ion-text>Disculpe, Usted No tiene movimientos registrados.</ion-text></ion-label>
+  </ion-card>
+
+    
   </ion-grid>
 
 </section>
@@ -142,56 +163,34 @@
 
 <section *ngIf="this.step=='2'">
 
-  <ion-grid *ngIf="resultadostodos&&this.isloggedin=='si'&&this.puedevervideos=='si'">
-
-  <ion-row class="ion-align-items-center">
-    <ion-col size="12" class="ion-text-center">
-      <ion-button  (click)="volverapaso1()" color="danger" ><ion-icon color="primary" name="backspace-outline"></ion-icon>
-        <ion-text style="font-weight: 500;">VOLVER</ion-text>
-      </ion-button>
-    </ion-col>
-  </ion-row>
-
-
-
-    <button style="background-color: transparent;width:100%;" *ngFor="let video of resultadostodos | filter:filterTerm" (click)="openVideo(video)" >
-  
-        <ion-row>
-            <ion-col size="4">
-              <!-- <ion-thumbnail item-start> -->
-                <img width="120px" height="90px" style="border-radius: 10px;"  [src]="video.snippet.thumbnails.default.url">
-              <!-- </ion-thumbnail> -->
-            </ion-col>
-            <ion-col size="8">
-                  <h2 style="color:#f07404; font-family: 'Times New Roman', Times, serif;" color="primary">{{video.snippet.title}}</h2>
-                  <!-- <p>{{ video.snippet.description }}</p> -->
-             </ion-col>
-        </ion-row>
-        <br>
-    </button>
-    <ion-fab style="background-color: transparent;" slot="fixed" vertical="bottom" horizontal="end" #fab>
-      <ion-fab-button>
-        <ion-icon name="share-social"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-list side="top">
-        <ion-fab-button color="vimeo" (click)="openSocial('Vimeo', fab)">
-          <ion-icon name="logo-vimeo"></ion-icon>
-        </ion-fab-button>
-        <ion-fab-button color="instagram" (click)="openSocial('Instagram', fab)">
-          <ion-icon name="logo-instagram"></ion-icon>
-        </ion-fab-button>
-        <ion-fab-button color="twitter" (click)="openSocial('Twitter', fab)">
-          <ion-icon name="logo-twitter"></ion-icon>
-        </ion-fab-button>
-        <ion-fab-button color="facebook" (click)="openSocial('Facebook', fab)">
-          <ion-icon name="logo-facebook"></ion-icon>
-        </ion-fab-button>
-      </ion-fab-list>
-    </ion-fab>
-  </ion-grid>
 
 </section>
 
+
+</section> 
+<!-- cierre de tipo cuenta -->
+
+<section *ngIf="this.json.tipo_cuenta==999">
+  <ion-row class="ion-align-items-center">
+    <ion-col size="12" class="ion-text-center">
+      <ion-text  color="primary" >Bienvenido Administrador</ion-text>
+    </ion-col>
+  </ion-row>
+</section>
+
+<section *ngIf="this.json.tipo_cuenta==null||this.json.tipo_cuenta==undefined">
+  <ion-row class="ion-align-items-center">
+    <ion-col size="12" class="ion-text-center">
+      <ion-text  (click)="reingresar()" color="danger" >Sección expirada debe reingresar.</ion-text>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-align-items-center">
+    <ion-col size="12" class="ion-text-center">
+      <ion-button  (click)="reingresar()" color="danger" ><ion-text style="font-weight: 500;">REINGRESAR</ion-text>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</section>
 
 
 </ion-content>

@@ -66,13 +66,13 @@ export class LoginPage {
       this.userData.login(this.login.username);
 
 
-      var dataoptimaconsultaruser = {
-        nombre_solicitud:'optimaconsultaruser',
+      var datamiscobrosconsultaruser = {
+        nombre_solicitud:'miscobrosconsultaruser',
         username:this.login.username,
         password:this.estacontrasena
       }
-        this.json.variasfunciones(dataoptimaconsultaruser).subscribe((res: any ) =>{
-              console.log(' respuesta optimaconsultaruser ',res);
+        this.json.variasfunciones(datamiscobrosconsultaruser).subscribe((res: any ) =>{
+              console.log(' respuesta miscobrosconsultaruser ',res);
               if(res!='credencialesincorrectas'){
                 this.json.isloggedin='si';
                 this.json.username=res.username;
@@ -123,20 +123,21 @@ export class LoginPage {
       this.userData.login(this.login.username);
 
 
-      var dataoptimacreateuser = {
+      var datamiscobroscreateuser = {
         create_date: new Date(),
-        nombre_solicitud:'optimacreateuser',
+        nombre_solicitud:'miscobroscreateuser',
         username:this.login.username,
         password:this.estacontrasena,
-        tipo_cuenta:'0'
+        tipo_cuenta:'1'
       }
-        this.json.variasfunciones(dataoptimacreateuser).subscribe((res: any ) =>{
-              console.log(' respuesta optimacreateuser ',res);
+        this.json.variasfunciones(datamiscobroscreateuser).subscribe((res: any ) =>{
+              console.log(' respuesta miscobroscreateuser ',res);
               if(res.id>0){
                 mensajeactualizando.dismiss();
                 creado.present();
                 this.menu.enable(true);
                 this.json.isloggedin='si';
+                this.json.tipo_cuenta=res.tipo_cuenta;
                 this.router.navigateByUrl('/app/tabs/schedule');
               }
               else{

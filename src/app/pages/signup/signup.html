@@ -6,7 +6,7 @@
 
     <ion-title>Inicio especial</ion-title>
         <ion-buttons  slot="end">
-            <ion-button color="primary" (click)="step2()" *ngIf="this.step=='1'&&this.json.tipo_cuenta==999">Activar Usuarios</ion-button>
+            <ion-button color="primary" (click)="step2()" *ngIf="this.step=='1'&&this.json.tipo_cuenta==999">Administrar Usuarios</ion-button>
             <ion-button color="primary" (click)="step1()" *ngIf="this.step=='2'&&this.json.tipo_cuenta==999">Volver</ion-button>
          </ion-buttons>
   </ion-toolbar>
@@ -35,7 +35,7 @@
         <ion-input (ionChange)="changecodigosvalidosactivar($event)" size="small"></ion-input>
       </ion-item>
       
-      <ion-button  (click)="agregarcodigo()" color="danger" ><ion-text style="font-weight: 500;">INGRESAR</ion-text>
+      <ion-button  (click)="miscobrosagregarcodigo()" color="danger" ><ion-text style="font-weight: 500;">INGRESAR</ion-text>
       </ion-button>
     </ion-col>
   </ion-row>
@@ -50,7 +50,7 @@
     </ion-col>
     </ion-row>
 
-    <section *ngFor="let cadacodigo of this.respuestaobtenercodigosoptimacodigosdeactivacion">
+    <section *ngFor="let cadacodigo of this.respuestamiscobrosobtenercodigosoptimacodigosdeactivacion">
 
 
     <ion-row class="ion-align-items-center">
@@ -84,40 +84,51 @@
 
 <section  *ngIf="this.step=='2'">
 
-  <ion-text>Lista de usuarios activados / desactivados:</ion-text>
-
+  <ion-row class="ion-align-items-center">
+    <ion-col style="text-align: center;" size="12" class="ion-text-center">
+      <ion-text>Lista de usuarios activados / desactivados:</ion-text>
+    </ion-col>
+  </ion-row>
 
   <ion-row class="ion-align-items-center">
-    <ion-col size="5" class="ion-text-center">
+    <ion-col size="4" class="ion-text-center">
       <ion-text color="primary" >Usuario<br>desactivado</ion-text>
   
     </ion-col>
-    <ion-col size="4" class="ion-text-center">
+    <ion-col size="3" class="ion-text-center">
       <ion-text color="primary" >fecha<br>creacion</ion-text>
     </ion-col>
-    <ion-col size="3" class="ion-text-center">
-      <ion-text color="primary" >acccion de<br>activar/des</ion-text>
+    <ion-col size="2.5" class="ion-text-center">
+      <ion-text color="primary" >Act<br>Desac</ion-text>
+    </ion-col>
+    <ion-col size="2.5" class="ion-text-center">
+      <ion-text color="primary" >Admini-<br>strar</ion-text>
     </ion-col>
     </ion-row>
 
-<section *ngFor="let cadausuario of this.respuestatodoslosusuarios">
+<section *ngFor="let cadausuario of this.respuestamiscobrostodoslosusuarios">
 
 
 
 
   <ion-row class="ion-align-items-center">
-  <ion-col size="5" class="ion-text-center">
+  <ion-col size="4" class="ion-text-center">
     <ion-text color="primary" >{{cadausuario.username}}</ion-text>
 
   </ion-col>
-  <ion-col size="4" class="ion-text-center">
-    <ion-text color="primary" >{{cadausuario.create_date}}</ion-text>
-  </ion-col>
   <ion-col size="3" class="ion-text-center">
-    <ion-button *ngIf="cadausuario.tipo_cuenta=='0'" color="primary" (click)="activarusuario(cadausuario)">Activar</ion-button>
-    <ion-button *ngIf="cadausuario.tipo_cuenta=='1'"  color="danger" (click)="desactivarusuario(cadausuario)">Desactivar</ion-button>
-
+    <ion-text style="font-size: small;" color="primary" >{{cadausuario.create_date}}</ion-text>
   </ion-col>
+  <ion-col size="2.5" class="ion-text-center">
+    <ion-button size="small;" *ngIf="cadausuario.tipo_cuenta=='0'" color="success" (click)="activarusuario(cadausuario)">Act</ion-button>
+    <ion-button size="small;" *ngIf="cadausuario.tipo_cuenta=='1'"  color="danger" (click)="desactivarusuario(cadausuario)">Des</ion-button>
+  </ion-col>
+
+  <ion-col size="2.5" class="ion-text-center">
+    <ion-button size="small;" color="primary" (click)="administrarusuario(cadausuario)"><ion-icon style="color:white;" name="document-text-outline"></ion-icon></ion-button>
+  </ion-col>
+
+
   </ion-row>
 
 </section>
