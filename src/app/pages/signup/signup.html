@@ -111,7 +111,7 @@
 
 
 
-  <ion-row class="ion-align-items-center">
+  <ion-row *ngIf="cadausuario.tipo_cuenta!='999'" class="ion-align-items-center">
   <ion-col size="4" class="ion-text-center">
     <ion-text color="primary" >{{cadausuario.username}}</ion-text>
 

@@ -185,12 +185,12 @@ export class SignupPage {
       });
       actualizando.present();
 
-      var datadesmiscobrosactivarusuariopanel = {
-        nombre_solicitud:'desmiscobrosactivarusuariopanel',
+      var datamiscobrosdesactivarusuariopanel = {
+        nombre_solicitud:'miscobrosdesactivarusuariopanel',
         username: cadausuario.username
       }
-        this.json.variasfunciones(datadesmiscobrosactivarusuariopanel).subscribe((res: any ) =>{
-              console.log(' respuesta desmiscobrosactivarusuariopanel ',res);
+        this.json.variasfunciones(datamiscobrosdesactivarusuariopanel).subscribe((res: any ) =>{
+              console.log(' respuesta miscobrosdesactivarusuariopanel ',res);
               actualizando.dismiss();
 
               //desactivado/activado actualizamos lista...
