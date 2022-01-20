@@ -77,6 +77,7 @@ export class LoginPage {
                 this.json.isloggedin='si';
                 this.json.username=res.username;
                 this.json.tipo_cuenta=res.tipo_cuenta;
+                this.json.id_usuario=res.id;
                 exitoso.present();
                 mensajeactualizando.dismiss();
                     this.menu.enable(true);
@@ -138,6 +139,7 @@ export class LoginPage {
                 this.menu.enable(true);
                 this.json.isloggedin='si';
                 this.json.tipo_cuenta=res.tipo_cuenta;
+                this.json.id_usuario=res.id;
                 this.router.navigateByUrl('/app/tabs/schedule');
               }
               else{

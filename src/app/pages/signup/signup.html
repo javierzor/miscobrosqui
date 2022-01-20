@@ -17,7 +17,7 @@
   <section *ngIf="this.step=='1'" >
 
   <div class="signup-logo">
-    <img src="assets/img/appicon.svg" alt="Ionic Logo">
+    <img src="assets/img/logo_miscobrosaqui.png" alt="Ionic Logo">
   </div>
 
 
@@ -134,5 +134,154 @@
 </section>
 
 </section>
+
+
+
+
+<section *ngIf="this.step!='1'&&this.step!='2'&&this.step=='3'">
+
+  <ion-grid>
+
+    <ion-row class="ion-align-items-center">
+      <ion-col size="12" class="ion-text-center">
+        <ion-button  (click)="step2()" color="danger" ><ion-text style="font-weight: 500;">Volver</ion-text>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-align-items-center">
+      <ion-col size="10.5" class="ion-text-center">
+
+      </ion-col>
+      <ion-col size="1.5" class="ion-text-center">
+        <ion-button color="primary" (click)="step4()" *ngIf="this.json.tipo_cuenta==999"><ion-icon style="color:white;" name="add-outline"></ion-icon></ion-button>
+      </ion-col>
+    </ion-row>
+
+
+
+  
+    <ion-card>
+      <ion-card-header *ngIf="this.respuestamiscobrosconsultarmovimientos.length>0" >
+        <ion-card-subtitle>
+        <ion-row>
+          <ion-col style="text-align: center;" size="5.5">
+            <ion-text>Nombre</ion-text>
+          </ion-col>
+          <ion-col style="text-align: center;" size="3.5">
+            <ion-text>Metodo</ion-text>
+          </ion-col>
+          <ion-col style="text-align: center;" size="3">
+            <ion-text>Monto</ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+
+<ion-card *ngFor="let movimiento of this.respuestamiscobrosconsultarmovimientos">
+  <ion-card-header *ngIf="this.respuestamiscobrosconsultarmovimientos.length>0" >
+    <ion-card-subtitle>
+    <ion-row>
+      <ion-col style="text-align: center;" size="5.5">
+        <ion-text color="primary">{{movimiento.nombre}}</ion-text>
+      </ion-col>
+      <ion-col style="text-align: center;" size="3.5">
+        <ion-text color="primary">{{movimiento.metodo}}</ion-text>
+      </ion-col>
+      <ion-col style="text-align: center;" size="2">
+        <ion-text color="primary">{{movimiento.monto}}</ion-text>
+      </ion-col>
+      <ion-col style="text-align: center;" size="1">
+        <ion-button (click)="borrarmovimiento(movimiento)" style="margin-top: -5px;" size="small" color="primary">
+          <ion-icon style="color:white;" name="close-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-card-subtitle>
+  </ion-card-header>
+  </ion-card>
+
+
+  <ion-card *ngIf="this.respuestamiscobrosconsultarmovimientos.length=='0'" style="text-align: center;" color="transparent;" color="transparent">
+    <br>
+    <ion-label><ion-text>Disculpe, este usuario no cuenta con movimientos registrados.</ion-text></ion-label>
+  </ion-card>
+
+    
+  </ion-grid>
+
+</section>
+
+<section *ngIf="this.step!='1'&&this.step!='2'&&this.step!='3'&&this.step=='4'">
+
+
+
+  <ion-row class="ion-align-items-center">
+    <ion-col size="1.5" class="ion-text-center">
+      <ion-button color="primary" (click)="step3()"><ion-icon style="color:white;" name="arrow-undo-outline"></ion-icon></ion-button>
+    </ion-col>
+    <ion-col size="10.5" class="ion-text-center">
+    </ion-col>
+  </ion-row>
+
+  <ion-card>
+    
+    <ion-row>
+        <ion-col size="6">
+          <ion-text color="primary">Nombre:</ion-text>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label position="floating">Nombre...</ion-label>
+            <ion-input [(ngModel)]="agregarnombre"></ion-input>
+          </ion-item>
+        </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="6">
+        <ion-text color="primary">Metodo:</ion-text>
+      </ion-col>
+      <ion-col size="6">
+        <ion-item>
+          <ion-label>Metodo:</ion-label>
+          <ion-select style="font-size: small;" [(ngModel)]="agregarmetodo" interface="popover" placeholder="Seleccione..">
+            <ion-select-option value="Paypal">Paypal</ion-select-option>
+            <ion-select-option value="Transferencia">Transferencia</ion-select-option>
+            <ion-select-option value="Deposito">Deposito</ion-select-option>
+            <ion-select-option value="Efectivo">Efectivo</ion-select-option>
+          </ion-select>
+        </ion-item>
+        
+
+      </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col size="6">
+      <ion-text color="primary">Monto:</ion-text>
+    </ion-col>
+    <ion-col size="6">
+      <ion-item>
+        <ion-label position="floating">monto...</ion-label>
+        <ion-input [(ngModel)]="agregarmonto"></ion-input>
+      </ion-item>
+     </ion-col>
+</ion-row>
+
+
+<ion-row class="ion-align-items-center">
+  <ion-col size="12" class="ion-text-center">
+    <ion-button [disabled]="agregarnombre==''||agregarmonto==''||agregarnombre==null||agregarnombre==undefined||agregarmetodo==null||agregarmetodo==undefnied||agregarmonto==null||agregarmonto==undefined" (click)="agregarmovimiento()" color="primary" ><ion-text style="font-weight: 500;">Agregar <ion-icon style="color:white;" name="checkmark-done-outline"></ion-icon></ion-text>
+    </ion-button>
+  </ion-col>
+</ion-row>
+
+</ion-card>
+
+
+</section>
+
 
 </ion-content>

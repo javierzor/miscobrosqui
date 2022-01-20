@@ -26,9 +26,11 @@ export class JsonService {
   public isloggedin: any ='no';
   public tipo_cuenta: any;
   username: any;
+  id_usuario: any;
   client_id: string;
   client_secret: string;
   refresh_token: string;
+  cadausuariotemporal: any;
 
   constructor(
     private youtube: YoutubeVideoPlayer,

@@ -58,6 +58,7 @@ export class SchedulePage implements OnInit {
   listaconsulta: any;
   playlistsmanual:  Array<any> = [];
   listasderepro2: any;
+  respuestamiscobrosconsultarmovimientos: any;
 
   constructor(
     private loadingController: LoadingController,
@@ -78,8 +79,55 @@ export class SchedulePage implements OnInit {
   ) 
   
   {
-
+    this.consultarmovimientos();
     this.step='1'
+
+  }
+
+  
+
+  ionViewWillEnter(){
+    this.consultarmovimientos();
+    this.step='1';
+  }
+
+  ionViewDidEnter(){
+    this.consultarmovimientos();
+    this.step='1';
+
+  }
+  ionViewWillLeave(){
+    this.consultarmovimientos();
+    this.step='1';
+
+  }
+
+  ionViewDidLeave(){
+    this.consultarmovimientos();
+    this.step='1';
+  }
+
+  
+
+  consultarmovimientos(){
+    var datamiscobrosconsultarmovimientos = {
+      nombre_solicitud:'miscobrosconsultarmovimientos',
+      id_usuario: this.json.id_usuario
+    }
+      this.json.variasfunciones(datamiscobrosconsultarmovimientos).subscribe((res: any ) =>{
+            console.log(' respuesta miscobrosconsultarmovimientos ',res);
+            this.respuestamiscobrosconsultarmovimientos=res;
+      });
+
+
+  }
+
+  ngOnInit() {
+
+    this.updateSchedule();
+    this.ios = this.config.get('mode') === 'ios';
+    this.step='1';
+    this.consultarmovimientos();
 
   }
 
@@ -97,40 +145,6 @@ export class SchedulePage implements OnInit {
     this.menu.enable(false);
     this.router.navigate(['/login']);
   }
-
-
-
-  
-
-  ngOnInit() {
-
-    this.step='1';
-
-
-    this.updateSchedule();
-
-    this.ios = this.config.get('mode') === 'ios';
-  }
-
-  ionViewWillEnter(){
-    this.step='1';
-  }
-
-  ionViewDidEnter(){
-    this.step='1';
-
-  }
-  ionViewWillLeave(){
-    this.step='1';
-
-  }
-
-  ionViewDidLeave(){
-    this.step='1';
-  }
-
-
-
 
   updateSchedule() {
     // Close any open sliding items when the schedule updates

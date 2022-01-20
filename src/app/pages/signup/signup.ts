@@ -25,6 +25,12 @@ export class SignupPage {
   respuestamiscobrosagregarcodigo: any;
   respuestamiscobrostodoslosusuarios: any;
   username: any;
+  agregarnombre: any;
+  agregarmetodo: any;
+  agregarmonto: any;
+
+  respuestamiscobrosconsultarmovimientos: any;
+  respuestamiscobroscrearmovimiento: any;
 
   constructor(
     private loadingController: LoadingController,
@@ -145,9 +151,17 @@ export class SignupPage {
   }
 
   
+  
+  async step4(){
+    this.step='4';
+  }
+
   async step1(){
     this.step='1';
+  }
 
+    async step3(){
+    this.step='3';
   }
 
   
@@ -202,8 +216,86 @@ export class SignupPage {
     
   }
 
-  administrarusuario(cadausuario){
+  async administrarusuario(cadausuario){
     console.log('cadausuario',cadausuario);
+    this.json.cadausuariotemporal=cadausuario.id
+        
+    const actualizando = await this.loadingController.create({
+      message: 'actualizando lista...',spinner: 'bubbles',duration: 14000,
+      });
+      actualizando.present();
+
+            var datamiscobrosconsultarmovimientos = {
+              nombre_solicitud:'miscobrosconsultarmovimientos',
+              id_usuario: cadausuario.id
+            }
+              this.json.variasfunciones(datamiscobrosconsultarmovimientos).subscribe((res: any ) =>{
+                    console.log(' respuesta miscobrosconsultarmovimientos ',res);
+                    this.respuestamiscobrosconsultarmovimientos=res;
+                    this.step='3';
+                    actualizando.dismiss();
+              });
+
+
   }
+
+
+  async borrarmovimiento(movimiento){
+    console.log('movimiento',movimiento);
+    const actualizando = await this.loadingController.create({
+      message: 'actualizando...',spinner: 'bubbles',duration: 14000,
+      });
+      actualizando.present();
+
+            var datamiscobrosborrarmovimiento = {
+              nombre_solicitud:'miscobrosborrarmovimiento',
+              id: movimiento.id
+            }
+              this.json.variasfunciones(datamiscobrosborrarmovimiento).subscribe((res: any ) =>{
+                    console.log(' respuesta miscobrosborrarmovimiento ',res);
+                    actualizando.dismiss();
+                    var cadausuario = {
+                      id:this.json.cadausuariotemporal
+                    }
+                    this.administrarusuario(cadausuario);
+              });
+
+
+  }
+  
+  async agregarmovimiento(){
+
+    
+    var datamiscobroscrearmovimiento= {
+      nombre_solicitud:'miscobroscrearmovimiento',
+      id_usuario:this.json.cadausuariotemporal,
+      nombre:this.agregarnombre,
+      metodo:this.agregarmetodo,
+      monto:this.agregarmonto
+      
+    }
+
+    const actualizando = await this.loadingController.create({
+      message: 'Agregando...',spinner: 'bubbles',duration: 14000,
+      });
+      actualizando.present();
+    console.log('datamiscobroscrearmovimiento',datamiscobroscrearmovimiento);
+    this.json.variasfunciones(datamiscobroscrearmovimiento).subscribe((res: any ) =>{
+      console.log(' respuesta miscobroscrearmovimiento ',res);
+      this.respuestamiscobroscrearmovimiento=res;
+      actualizando.dismiss();
+      this.step='3';
+      var cadausuario = {
+        id:this.json.cadausuariotemporal
+      }
+      this.administrarusuario(cadausuario);
+
+    });  
+
+
+
+  }
+
+  
 
 }
