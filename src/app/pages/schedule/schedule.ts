@@ -97,13 +97,13 @@ export class SchedulePage implements OnInit {
 
   }
   ionViewWillLeave(){
-    this.consultarmovimientos();
+    // this.consultarmovimientos();
     this.step='1';
 
   }
 
   ionViewDidLeave(){
-    this.consultarmovimientos();
+    // this.consultarmovimientos();
     this.step='1';
   }
 

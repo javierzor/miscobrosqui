@@ -128,7 +128,7 @@
 
 
     <ion-card>
-      <ion-card-header *ngIf="this.respuestamiscobrosconsultarmovimientos.length>0" >
+      <ion-card-header>
         <ion-card-subtitle>
         <ion-row>
           <ion-col style="text-align: center;" size="5.5">
@@ -146,7 +146,7 @@
     </ion-card>
 
 <ion-card *ngFor="let movimiento of this.respuestamiscobrosconsultarmovimientos">
-  <ion-card-header *ngIf="this.respuestamiscobrosconsultarmovimientos.length>0" >
+  <ion-card-header>
     <ion-card-subtitle>
     <ion-row>
       <ion-col style="text-align: center;" size="5.5">
@@ -165,10 +165,10 @@
   </ion-card>
 
 
-  <ion-card *ngIf="this.respuestamiscobrosconsultarmovimientos.length==0" style="text-align: center;" color="transparent;" color="transparent">
+  <!-- <ion-card *ngIf="this.respuestamiscobrosconsultarmovimientos.length==0" style="text-align: center;" color="transparent;" color="transparent">
     <br>
     <ion-label><ion-text>Disculpe, este usuario no cuenta con movimientos registrados.</ion-text></ion-label>
-  </ion-card>
+  </ion-card> -->
     
   </ion-grid>
 
