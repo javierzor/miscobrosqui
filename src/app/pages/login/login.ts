@@ -95,6 +95,11 @@ export class LoginPage {
   }
 
 
+  homepage(){
+    this.router.navigateByUrl('https://miscobrosaqui.ml/');
+
+  }
+
   ENTERcontrasena(form: NgForm){
     if(this.login.username!=''&&this.estacontrasena!=''){
       console.log('apreto enter y se intenrara logear');
